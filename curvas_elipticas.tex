@@ -440,12 +440,14 @@ bits que se necesitaba para codificarlos. Esto frente a la ECC era un
 inconveniente ya que el tamaño en bits de las claves que se usaban
 eran mucho menores y crecían de manera más comedida.
 
+En esta tabla mostramos los tamaños de las claves de estos dos algoritmos, denotados $k$ y $f$, al mismo nivel de securidad.
+
 \begin{table}[H]
 \centering
 \begin{tabular}{|c|c|c|}
 \hline
 \textbf{Security Strength} & \textbf{RSA} & \textbf{ECDSA} \\ \hline
-$\leq$ 80                  & k=1024       & f = 160 - 223  \\
+$\leq$ 80                  & k = 1024       & f = 160 - 223  \\
 112                        & k = 2048     & f = 224 - 255  \\
 128                        & k = 3072     & f = 256 - 383  \\
 192                        & k = 7680     & f = 384 - 511  \\
