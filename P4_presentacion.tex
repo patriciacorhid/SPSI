@@ -1,4 +1,4 @@
-\documentclass[serif,9pt]{beamer}
+\documentclass[spanish,9pt]{beamer}
 \usetheme{tree}
 %\usepackage{german}
 \usepackage[latin1]{inputenc}
@@ -48,20 +48,20 @@
 
 \begin{document}
 \setbeamertemplate{navigation symbols}{}
-\title{Curvas elÌpticas en criptografÌa}  
-\author{Yabir GarcÌa Benchakhtir\\
+\title{Curvas el√≠pticas en criptograf√≠a}  
+\author{Yabir Garc√≠a Benchakhtir\\
 David Cabezas Berrido\\
-Patricia CÛrdoba Hidalgo}
+Patricia C√≥rdoba Hidalgo}
 \date{}
 
 \begin{frame}
 \titlepage
 \end{frame}
 
-\section{DefiniciÛn de curva elÌptica}
+\section{Definici√≥n de curva el√≠ptica}
 \begin{frame}\frametitle{Conceptos previos}
 El \textbf{espacio proyectivo} sobre un cuerpo $K$, $\mathbb{P}_n(K)$, es el conjunto de puntos en
-$K^{n+1}-\{\mathbf{0}\}$ con la relaciÛn de equivalencia $\sim$ que
+$K^{n+1}-\{\mathbf{0}\}$ con la relaci√≥n de equivalencia $\sim$ que
 relaciona dos elementos de la siguiente forma
     \begin{align*} (a_0,\dots,a_n) \sim (a_0',\dots,a_n') \iff \exists
 \lambda\in K^* \text{ tal que } (a_0,\dots,a_n) = \lambda
@@ -75,8 +75,8 @@ interpretar como un plano y una recta ``en el infinito''.
 En $\mathbb{P}_n(K)$ dos rectas siempre se cortan, ya que las rectas paralelas se cortan ``en el infinito''.
 \end{frame}
 
-\begin{frame}\frametitle{DefiniciÛn}
-Se define una curva elÌptica como un par $(E, O)$, donde $E$ es una
+\begin{frame}\frametitle{Definici√≥n}
+Se define una curva el√≠ptica como un par $(E, O)$, donde $E$ es una
 curva proyectiva no singular de genus uno y $O \in E$.
 
 Al punto $O$ se le denomina ``punto en el infinito''.
@@ -86,45 +86,45 @@ Denotaremos la curva como $E$, sobreentendiendo cual es el punto $O$.
 \vspace{5mm}
 
 El \textbf{genus} de una curva algebraica proyectiva no singular corresponde
-al n˙mero de agujeros de la superficie orientable compacta obtenida
+al n√∫mero de agujeros de la superficie orientable compacta obtenida
 al considerar la curva como una variedad real.
 
 \end{frame}
 
-\begin{frame}\frametitle{CaracterizaciÛn}
-Hay un isomorfismo $\Phi$ entre una curva elÌptica $E$ y la curva que
-cumple la ecuaciÛn de Weierstrass:
+\begin{frame}\frametitle{Caracterizaci√≥n}
+Hay un isomorfismo $\Phi$ entre una curva el√≠ptica $E$ y la curva que
+cumple la ecuaci√≥n de Weierstrass:
 $$ y^2 + a_1xy + a_3y = x^3 + a_2x^2 + a_4x + a_6$$
 con $a_1, \ldots, a_6 \in K$ y satisfaciendo $\Phi(O) = [0,1,0]$ y
 $\Phi(P) \in \{[x,y,1]\} \hspace{3mm} \forall P \in E \backslash
 \{O\}$.
 
-Si la caracterÌstica de $K$ es distinta de $2$ y $3$, podemos
-simplificar la ecuaciÛn asÌ:
+Si la caracter√≠stica de $K$ es distinta de $2$ y $3$, podemos
+simplificar la ecuaci√≥n as√≠:
 $$y^2 = x^3 + Ax + B$$ con $A, B \in K$.
 
-La curva quedarÌa entonces:
+La curva quedar√≠a entonces:
 \[E=\{(x,y)\in K\times K:y^2=x^3+Ax+B\}\cup\{O\}\]
 
 \end{frame}
 
-\begin{frame}\frametitle{Ejemplos de curvas elÌpticas}
+\begin{frame}\frametitle{Ejemplos de curvas el√≠pticas}
 \begin{figure}[H]
   \centering
   \includegraphics[width=70mm]{imagenes/curvas}
-  \caption{Ejemplos de curvas elÌpticas ($\Delta = -16(4A^3 + 27B^2)$)}
+  \caption{Ejemplos de curvas el√≠pticas ($\Delta = -16(4A^3 + 27B^2)$)}
 \end{figure}
 \end{frame}
 
-\begin{frame}\frametitle{Ejemplos de curvas elÌpticas}
-  Consideraremos las curvas elÌpticas sobre grupos finitos, pero ayuda
+\begin{frame}\frametitle{Ejemplos de curvas el√≠pticas}
+  Consideraremos las curvas el√≠pticas sobre grupos finitos, pero ayuda
 visualizarlas sobre $\mathbb{R}$ para entender las operaciones de
-grupo sobre ellas. Mostramos un ejemplo de curva elÌptica sobre
+grupo sobre ellas. Mostramos un ejemplo de curva el√≠ptica sobre
 $\mathbb{R}$ y sobre un grupo finito.
 \begin{figure}[H]
   \centering
   \includegraphics[width=70mm]{imagenes/curvas_Fp}
-\caption{Curva elÌptica sobre $\mathbb{R}$ y sobre $\mathbb{Z}_{89}$}
+\caption{Curva el√≠ptica sobre $\mathbb{R}$ y sobre $\mathbb{Z}_{89}$}
 \end{figure}
 \end{frame}
 
@@ -136,7 +136,7 @@ $\mathbb{R}$ y sobre un grupo finito.
   \includegraphics[width=112mm]{imagenes/operaciones}
 \end{figure}
 
-Definimos tambiÈn $O+O=O$.
+Definimos tambi√©n $O+O=O$.
 \end{frame}
 
 \begin{frame}\frametitle{Estructura de grupo de la curva $E$}
@@ -158,19 +158,19 @@ por un escalar $n$ como:
 
 $$nP = \underbrace{P + P + \ldots + P}_{{n}}$$
 
-Esta operaciÛn puede calcularse con eficiencia $O(\log n)$ escribiendo
+Esta operaci√≥n puede calcularse con eficiencia $O(\log n)$ escribiendo
 $n$ en base $2$ y realizando duplicaciones sucesivas.
 \end{frame}
 
-\begin{frame}\frametitle{Encontrar subgrupo cÌclico $<G>\subset E(\mathbb{F}_p)$}
+\begin{frame}\frametitle{Encontrar subgrupo c√≠clico $<G>\subset E(\mathbb{F}_p)$}
 \begin{enumerate}
-\item Calculamos el n˙mero de puntos de la curva elÌptica, $N =
+\item Calculamos el n√∫mero de puntos de la curva el√≠ptica, $N =
 \#E(\mathbb{F}_p)$. Esto se puede lograr mediante el
 \href{https://en.wikipedia.org/wiki/Schoof\%27s_algorithm}{\color{cyan}{algoritmo de
 Schoof}}.
 \item Elegimos el factor primo mayor de $N$, al que llamaremos $n$.
 \item Tomamos $h = N/n$. Para que una curva sea segura, el cofactor ha
-de ser pequeÒo.
+de ser peque√±o.
 \item Escogemos un punto cualquiera de la curva $P\in E(\mathbb{F}_p)$
 y sea $G=hP$.
 \item Si $G$ es el punto en el infinito, cogemos otro punto $P$. De
@@ -179,7 +179,7 @@ esta manera, el orden de $G$ es $n$.
 
 \vfill
 
-Podemos utilizar una curva de la \href{https://safecurves.cr.yp.to/}{\color{cyan}{lista de curvas seguras}} ya conocidas con cofactor pequeÒo.
+Podemos utilizar una curva de la \href{https://safecurves.cr.yp.to/}{\color{cyan}{lista de curvas seguras}} ya conocidas con cofactor peque√±o.
 
 \end{frame}
 
@@ -187,20 +187,20 @@ Podemos utilizar una curva de la \href{https://safecurves.cr.yp.to/}{\color{cyan
 
 \begin{frame}\frametitle{Problema del logaritmo discreto}
 Sea $<G>$ un subgrupo aditivo de $E(K)$, \textbf{el problema del logaritmo
-discreto} para curvas elÌpticas es el problema de encontrar $k$ de
+discreto} para curvas el√≠pticas es el problema de encontrar $k$ de
 manera que $kG=P$, para un punto dado $P \in <G>$.
 
 \vspace{5mm}
 
-La seguridad de las curvas elÌpticas en criptografÌa, descansa en la
+La seguridad de las curvas el√≠pticas en criptograf√≠a, descansa en la
 dificultad de resolver este problema.
 \end{frame}
 
-\section{Cifrado y firma con curvas elÌpticas}
+\section{Cifrado y firma con curvas el√≠pticas}
 
-\begin{frame}\frametitle{Par·metros compartidos}
+\begin{frame}\frametitle{Par√°metros compartidos}
 
-  Alice y Bob intercambian los siguientes par·metros por un canal potencialmente inseguro:
+  Alice y Bob intercambian los siguientes par√°metros por un canal potencialmente inseguro:
   
   \begin{itemize}
   \item Una curva $E(\mathbb{F}_p)$ segura.
@@ -210,78 +210,88 @@ dificultad de resolver este problema.
   \end{itemize}
 \end{frame}
 
-\begin{frame}\frametitle{Claves p˙blica y privada}
+\begin{frame}\frametitle{Claves p√∫blica y privada}
   Las claves son:
 
   \begin{itemize}
   \item Clave privada: Un entero $d_X \in [1, n-1]$ elegido de manera aleatoria.
-  \item Clave p˙blica: $Q_X=d_XG$.
+  \item Clave p√∫blica: $Q_X=d_XG$.
   \end{itemize}
 
 Con $X = A$ para las clavas de Alice y $X = B$ para las de Bob.
 
 \vspace{5mm}
 
-El c·lculo de $Q_X$ se puede realizar en tiempo $O(\log d_X)$.
+El c√°lculo de $Q_X$ se puede realizar en tiempo $O(\log d_X)$.
 \end{frame}
 
-\subsection{Algoritmo de firma digital en curvas elÌpticas (ECDSA)}
+\subsection{Algoritmo de firma digital en curvas el√≠pticas (ECDSA)}
 
-\begin{frame}\frametitle{Algoritmo de firma digital en curvas elÌpticas (ECDSA)}
+\begin{frame}\frametitle{Algoritmo de firma digital en curvas el√≠pticas (ECDSA)}
   Para firmar un mensaje, Alice sigue los siguientes pasos:
 
 \begin{enumerate}
 \item Calcula $e=HASH(m)$.
-\item Si definimos $L_n$ como el n˙mero de bits de $n$, tomamos como $z$ los $L_n$ bits menos
+\item Si definimos $L_n$ como el n√∫mero de bits de $n$, toma $z$ los $L_n$ bits menos
 significativos de $e$.
 \item Elige de manera aleatoria un entero secreto $k \in [1,n-1]$.
-\item Calculamos el punto de la curva $(x_1, y_1)=kG$.
-\item Tomamos $r = x_1 \text{ mod }n$. En el caso de que $r$ sea 0,
-volvemos al paso 3.
-\item Calcula $s=k^{-1}(z+rd_A) \text{ mod }n$. Si $s$ es 0, volvemos al paso 3.
+\item Calcula el punto de la curva $(x_1, y_1)=kG$.
+\item Toma $r = x_1 \text{ mod }n$. En el caso de que $r$ sea 0,
+vuelve al paso 3.
+\item Calcula $s=k^{-1}(z+rd_A) \text{ mod }n$. Si $s$ es 0, vuelve al paso 3.
 \end{enumerate}
 
 La firma es el par $(r,s)$.
 \end{frame}
 
-\begin{frame}\frametitle{VerificaciÛn de la firma}
+\begin{frame}\frametitle{Verificaci√≥n de la firma}
 
-  Para verificar que el emisor es Alice, Bob seguir· los pasos siguentes:
+  Para verificar que el emisor es Alice, Bob seguir√É¬° los pasos siguentes:
   \begin{enumerate}
 \item Comprueba que $Q_A \neq O$.
 \item Se debe cumplir que $nQ_A=O$
 \end{enumerate}
 
-Si las comprobaciones anteriores son satisfactorias, Bob deber·
+Si las comprobaciones anteriores son satisfactorias, Bob deber√°
 entonces proceder de la siguiente manera:
 
 \begin{enumerate}
-\item Comprobamos que $r,s\in[1, n-1]$, en otro caso, la firma es
-inv·lida.
-\item Calculamos, al igual que hacÌa Alice, $e$ usando la misma
-funciÛn de hashing que uso Alice.
-\item Tomamos de nuevo $z$ los $L_n$ bits menos significativos de $e$.
-\item Obtenemos $u_1 = zs^{-1} \text{ mod } n$ y $u_2 = rs^{-1} \text{
+\item Comprueba que $r,s\in[1, n-1]$, en otro caso, la firma es
+inv√°lida.
+\item Calcula  $e$ usando la misma funci√≥n de hashing que uso Alice.
+\item Toma de nuevo $z$ los $L_n$ bits menos significativos de $e$.
+\item Obtiene $u_1 = zs^{-1} \text{ mod } n$ y $u_2 = rs^{-1} \text{
 mod } n$.
-\item Calculamos el punto $C = (x_1,y_1)=u_1G+u_2Q_A$. Si $(x_1,
-y_1)=O$ entonces la firma no es v·lida.
-\item Finalmente la firma ser· v·lida si $r\mod x_1 ( \text{ mod }
-n$. En caso contrario, no lo ser·.
+\item Calcula el punto $C = (x_1,y_1)=u_1G+u_2Q_A$. Si $(x_1,
+y_1)=O$ entonces la firma no es v√°lida.
 \end{enumerate}
+Finalmente la firma ser√° v√°lida si $r = x_1 \text{ mod }n$. En caso contrario, no lo ser√°.
+\end{frame}
+
+\begin{frame}\frametitle{Comprobaci√≥n de los pasos de Bob}
+Veremos por qu√© con $C=u_1G+u_2Q_A$ obtenemos el resultado que queremos. Para ello notamos en primer lugar que $Q_A=d_AG$ por lo que
+$$C=u_1G+u_2d_AG$$
+Ahora usamos la propiedad asociativa:
+$$C = (u_1+u_2d_A)G$$
+desarrollamos las expresiones de $u_1$ y $u_2$
+$$C = (zs^{-1}+rd_As^{-1})G$$
+y aplicamos la propiedad asociativa de nuevo con lo que
+$$C = (z+rd_A)s^{-1}G$$
+Sustituimos $s$ por su expresi√≥n tal y como se calcul√≥ en el
+algoritmo:
+$$C = (z+rd_A)(z+rd_A)^{-1}(k^{-1})^{-1}G$$
+con lo que obtenemos $C = kG$
+\end{frame}
+
+\begin{frame}\frametitle{Problema}
 \end{frame}
 
 \begin{frame}\frametitle{}
 \end{frame}
 
-\begin{frame}\frametitle{}
-\end{frame}
-
-\begin{frame}\frametitle{}
-\end{frame}
-
-\begin{frame}[fragile]\frametitle{SimulaciÛn}
+\begin{frame}[fragile]\frametitle{Simulaci√≥n}
   \begin{lstlisting}
-    Recuerda poner fragile en el cÛgigo
+    Recuerda poner fragile en el c√≥gigo
   \end{lstlisting}
 \end{frame}
 
