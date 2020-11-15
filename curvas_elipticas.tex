@@ -45,7 +45,7 @@
 
 \begin{document}
 
-\title{\Huge \textbf{Cifrado con curvas elípticas}} \author{Yabir
+\title{\Huge \textbf{Curvas elípticas en criptografía}} \author{Yabir
 García Benchakhtir\\ David Cabezas Berrido\\ Patricia Córdoba Hidalgo
 } \date{}
 \maketitle
@@ -55,7 +55,7 @@ García Benchakhtir\\ David Cabezas Berrido\\ Patricia Córdoba Hidalgo
 
 \section{Definición de curva elíptica}
 
-Definimos el espacio proyectivo de dimensión n sobre un cuerpo $K$ al
+Definimos el espacio proyectivo de dimensión $n$ sobre un cuerpo $K$ al
 que notamos $\mathbb{P}_n(K)$ como el conjunto de puntos en
 $K^{n+1}-\{\mathbf{0}\}$ con la relación de equivalencia $\sim$ que
 relaciona dos elementos de la siguiente forma
@@ -64,9 +64,9 @@ relaciona dos elementos de la siguiente forma
 (a_0',\dots,a_n')
     \end{align*}
 
-En el caso $K=\mathbb{R}^2$, $P_2$ tiene como elementos a las rectas
+En el caso $K=\mathbb{R}$, $\mathbb{P}_2$ tiene como elementos a las rectas
 vectoriales de $\mathbb{R}^3$. Intuitivamente, este espacio se puede
-interpretar como un plano y una recta ``en el infinito’’. Este espacio
+interpretar como un plano y una recta ``en el infinito''. Este espacio
 tiene diversas propiedades, como que dos rectas proyectivas no
 coincidentes siempre se se cortan en un único punto, se podría decir
 que no existen rectas paralelas, sino rectas que se cortan en el
@@ -78,7 +78,7 @@ homogéneas, para $P_2$ se necesitan 3 coordenadas.
 
 Se define una curva elíptica como un par $(E, O)$, donde $E$ es una
 curva proyectiva no singular de genus uno y $O \in E$. Al punto $O$ se
-le denomina ``punto en el infinito’’. Denotaremos la curva como $E$,
+le denomina ``punto en el infinito''. Denotaremos la curva como $E$,
 sobreentendiendo cual es el punto $O$.
 
 El
@@ -104,8 +104,7 @@ Si la característica de $K$ es distinta de $2$ y $3$, podemos
 simplificar la ecuación así:
 $$y^2 = x^3 + Ax + B$$ con $A, B \in K$.
 
-Trabajamos por tanto con \[E=\{(x,y)\in K\times
-K:F(x,y)=0\}\cup\{O\}\] donde $F(x,y)=y^2-x^3-Ax-B$.
+Trabajamos por tanto con \[E=\{(x,y)\in K\times K:y^2=x^3+Ax+B\}\cup\{O\}\]
 
 Consideraremos las curvas elípticas sobre grupos finitos, pero ayuda
 visualizarlas sobre $\mathbb{R}$ para entender las operaciones de
@@ -206,7 +205,7 @@ por un escalar $n$ como:
 
 $$nP = \underbrace{P + P + \ldots + P}_{{n}}$$
 
-Esta operación puede calcularse con eficiencia $O(log n)$ escribiendo
+Esta operación puede calcularse con eficiencia $O(\log n)$ escribiendo
 $n$ en base $2$ y realizando duplicaciones sucesivas.
 
 Vamos a encontrar un subgrupo cíclico $<G>\subset E(\mathbb{F}_p)$ de
@@ -259,7 +258,7 @@ manera que $kG=P$, para un punto dado $P \in <G>$.
 La seguridad de las curvas elípticas en criptografía, descansa en la
 dificultad de resolver este problema.
 
-\section{Curvas elípticas en criptografía}
+\section{Cifrado y firma con curvas elípticas}
 
 Vamos a describir a continuación los pasos que seguirá Alice para
 mandar un mensaje firmado y cifrado a Bob. Ambos se deberán poner de
@@ -267,9 +266,8 @@ acuerdo en tres parámetros, que pueden acordar por un canal de
 comunicación potencialmente no seguro:
 
 \begin{itemize}
-\item Una curva $E(\mathbb{F}_p)$ que se elegirá de manera que sea
-segura.
-\item $G$ un punto de la curva de orden primo en la curva.
+\item Una curva $E(\mathbb{F}_p)$ segura.
+\item $G$ un punto de la curva de orden primo.
 \item Conocer el valor $n$ que es el orden del grupo $<G>\subset
 E(\mathbb{F}_p)$.
 \end{itemize}
@@ -285,7 +283,7 @@ curva, que se puede realizar en tiempo $O(log d_A)$. La clave pública
 de Alice será $Q_A$. Del mismo modo, la clave privada de Bob será
 $d_B$ y su clave pública será $Q_B$ .
 
-\subsection{Algoritmo de firma digital en curvas elípticas ECDSA}
+\subsection{Algoritmo de firma digital en curvas elípticas (ECDSA)}
 
 Para firmar un mensaje, Alice sigue los siguientes pasos:
 
@@ -383,7 +381,7 @@ método para elegir valores diferentes de $k$ podría ser utilizar el
 propio mensaje y la clave privada como semilla en el algoritmo
 aleatorio.
 
-\subsection{Algoritmo de cifrado en curvas elípticas ECDSA}
+\subsection{Algoritmo de cifrado en curvas elípticas}
 
 Sea $\Phi$ una función pública invertible que transforme el mensaje un
 punto de la curva $E(\mathbb{F}_p)$. Para cifrar un mensaje, Alice
@@ -403,6 +401,8 @@ puesto que $kQ_B=kd_BG=d_BkG$.
 \end{enumerate}
 
 El mensaje $m$ es $\Phi^{-1}(P_m)$.
+
+Como $d_A Q_B=d_A d_B G=d_B d_AG=d_B Q_A$, Alice y Bob disponen de un secreto compartido que pueden utilizar para cifrado simétrico. En lugar de un número $k$, Alice puede utilizar su propia clave privada. En este caso, $C$ sería la clave pública de Alice, por lo que no es necesario transmitirla junto al mensaje (habiéndola intercambiado previamente).
 
 \newpage
 
@@ -425,7 +425,7 @@ Se usaron distintos algoritmos para intentar atacar ECC, desde los más
 \textit{brutos} hasta el ataque \emph{rho de Pollard} que ya existía y
 se adaptó a las curvas elípticas. Este algoritmo junto al de
 \textit{baby-step/giant-step} tienen una complejidad de
-$O(\sqrt(N))$. El algoritmo que hizo temer por el futuro de ECC fue
+$O(\sqrt{N})$. El algoritmo que hizo temer por el futuro de ECC fue
 \textit{xedni} (descrito en Silverman). Se dudaba de la eficacia del
 algoritmo pero los defensores del RSA, que se veían en un momento de
 apogeo, vieron un punto de debilidad y quisieron proclamar que la ECC
