@@ -1,4 +1,4 @@
-\documentclass[xcolor=x11names,compress,utf8]{beamer}
+\documentclass[xcolor=x11names,compress,utf8, 9pt]{beamer}
 
 \usetheme{tree}
 %\usepackage{german}
@@ -284,9 +284,71 @@ con lo que obtenemos $C = kG$
 \end{frame}
 
 \begin{frame}\frametitle{Problema}
+  Bajo ningún concepto debemos elegir el mismo número $k$ para calcular dos firmas $(r, s)$, $(r, s')$ de dos mensajes distintos, $m$ y $m'$, ya que si eso ocurre podría averiguarse el
+valor de $d_A$.
+
+Este fallo de implementación fue usado para extraer la clave de usada
+en los sistemas PlayStation 3
 \end{frame}
 
-\begin{frame}\frametitle{}
+\begin{frame}\frametitle{Problema}
+  El receptor podría seguir los siguientes pasos para averiguar la clave privada $d_A$:
+  \begin{enumerate}
+  \item Calcular $z$ y $z’$, dado que la función $HASH$ es pública.
+  \item Puesto que $s-s’ = k^{-1}(z-z’)$ (por el paso 6 de la creación de la firma) podría averiguar $k = \frac{z-z’}{s-s’}$.
+  \item Como $s = k^{-1}(z+d_A)$, podría conseguir la clave privada $d_A = \frac{sk-z}{r}$.
+ \end{enumerate}
+\end{frame}
+
+\subsection{Algoritmo de cifrado en curvas elípticas}
+
+\begin{frame}\frametitle{Algoritmo de cifrado en curvas elípticas}
+  Sea $\Phi$ una función pública invertible que transforme el mensaje un
+punto de la curva $E(\mathbb{F}_p)$. Para cifrar un mensaje $m$, Alice
+sigue los siguientes pasos:
+
+\begin{enumerate}
+\item Alice elige un número $k \in [1, n-1]$.
+\item El texto cifrado será $(kG, kQ_B+P_m)$, donde $P_m = \Phi(m)$.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}\frametitle{Algoritmo de cifrado en curvas elípticas}
+Bob recibe la tupla $(C,D)$ y realiza los siguientes pasos para descifrar el mensaje:
+
+\begin{enumerate}
+\item Bob obtiene $P_m$ así: $P_m = D - d_BC = kQ_B + P_m - d_BkG$,
+puesto que $kQ_B=kd_BG=d_BkG$.
+\end{enumerate}
+
+El mensaje $m$ es $\Phi^{-1}(P_m)$.
+\end{frame}
+
+\begin{frame}\frametitle{Algoritmo de cifrado en curvas elípticas}
+Se puede usar cifrado simétrico, dado que ambos comparten el secreto
+$$d_A Q_B=d_A d_B G=d_B d_AG=d_B Q_A$$
+En lugar de un número $k$, Alice puede utilizar $d_A$ en el cifrado. En este caso, $C$ sería $Q_A$, por lo que no es necesario transmitirla junto al mensaje.
+\end{frame}
+
+\section{RSA y ECC}
+
+\begin{frame}\frametitle{RSA vs. ECC}
+
+En esta tabla mostramos los tamaños de las claves de estos dos algoritmos, denotados $k$ y $f$, al mismo nivel de securidad.
+  
+  \begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Security Strength} & \textbf{RSA} & \textbf{ECDSA} \\ \hline
+$\leq$ 80                  & k = 1024       & f = 160 - 223  \\
+112                        & k = 2048     & f = 224 - 255  \\
+128                        & k = 3072     & f = 256 - 383  \\
+192                        & k = 7680     & f = 384 - 511  \\
+256                        & k = 15360    & f = 512+       \\ \hline
+\end{tabular}
+\end{table}
+
 \end{frame}
 
 
