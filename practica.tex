@@ -69,8 +69,7 @@ durante el curso pero aplicando la teoría de curvas elípticas.
 Durante nuestros intentos de cifrar y descifrar utilizando ECC hemos encontrado
 \href{https://stackoverflow.com/a/58942471/2588566}{este comentario} donde se
 nos indica que no podemos realizar estos pasos directamente usando ECC. Usamos
-lo que se ha llamado \textit{Elliptic Curve Integrated Encryption Scheme} en
-este ejemplo.
+lo que se ha llama \textit{Elliptic Curve Integrated Encryption Scheme}.
 
 \section{Taller de criptografía}
 
@@ -99,13 +98,13 @@ ahora hacemos
   openssl ecparam -in secp256k1.pem -text -param_enc explicit -noout
 \end{lstlisting}
 
-obtenemos información sobre los parametros elegidos como 
+obtenemos información sobre los parametros elegidos como: 
 
 \begin{itemize}
   \item Los parámetros $A$ y $B$ de la ecuación de la curva.
   \item El número primo elegido para el cuerpo sobre el que se construye la curva.
-  \item El punto base que se ha elegido en la curva.
-  \item El orden del grupo que se genera.
+  \item El generador del punto cíclico, $G$.
+  \item El orden del grupo $<G>$.
   \item El cofactor del grupo cíclico.
 \end{itemize}
 
@@ -134,7 +133,7 @@ Si queremos guardar la clave pública en un archivo tenemos que hacer
 
 donde a partir de nuestra clave privada generamos un archivo de clave pública
 con la clave pública generada. Para ver la información almacenada en el nuevo
-archivo 
+archivo ejecutamos
 
 \begin{lstlisting}[language=bash]
   openssl ec -in userS-pubkey.pem -pubin -text -noout
@@ -160,7 +159,7 @@ usando el archivo de la clave privada generada en los primeros pasos.
     -peerkey userR-pubkey.pem -out secret.txt
 \end{lstlisting}
 
-Ciframos ahora utilizando el archivo de clave generado como clave
+Ciframos ahora utilizando el archivo \textit{secreto.txt} generado como clave
 
 \begin{lstlisting}[language=bash]
   openssl enc -aes-256-cbc -md sha512 -pbkdf2 -iter 100000 -salt \
@@ -170,7 +169,7 @@ Ciframos ahora utilizando el archivo de clave generado como clave
 además le hemos indicado que usamos \textit{sha512} como función de resumen y
 \textit{aes-256-cbc} como sistema de cifrado.
 
-Ahora el potencial receptor del mensaje debe seguir los siguientes pasos. En
+Ahora el receptor del mensaje debe seguir los siguientes pasos. En
 primer lugar crea el mismo secreto, pero esta vez usando su clave privada y la clave pública del emisor
 
 \begin{lstlisting}[language=bash]
