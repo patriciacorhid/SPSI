@@ -47,8 +47,6 @@
 \usepackage{listings}
 \lstset{basicstyle=\ttfamily,
   showstringspaces=false,
-  commentstyle=\color{red},
-  keywordstyle=\color{blue},
   numbers=none
 }
 
@@ -72,11 +70,11 @@ Durante nuestros intentos de cifrar y descifrar utilizando ECC hemos encontrado
 \href{https://stackoverflow.com/a/58942471/2588566}{este comentario} donde se
 nos indica que no podemos realizar estos pasos directamente usando ECC. Usamos
 lo que se ha llamado \textit{Elliptic Curve Integrated Encryption Scheme} en
-esta práctica.
+este ejemplo.
 
 \section{Taller de criptografía}
 
-En primer lugar comentamos que OpenSSL nos ofrece una seria de curvas ya
+En primer lugar comentamos que OpenSSL nos ofrece una serie de curvas ya
 definidas en su utilidad para terminal. Tenemos la posibilidad de listar las
 curvas disponibles utilizando:
 
@@ -104,9 +102,11 @@ ahora hacemos
 obtenemos información sobre los parametros elegidos como 
 
 \begin{itemize}
+  \item Los parámetros $A$ y $B$ de la ecuación de la curva.
   \item El número primo elegido para el cuerpo sobre el que se construye la curva.
   \item El punto base que se ha elegido en la curva.
   \item El orden del grupo que se genera.
+  \item El cofactor del grupo cíclico.
 \end{itemize}
 
 Una vez elegida la curva procedemos ahora a crear la clave privada. Para ello
@@ -119,7 +119,7 @@ utilizamos
 
 Con esta orden le indicamos que genere en un archivo \textit{userS-privkey.pem}
 una clave privada partiendo del archivo de configuración para la curva que hemos
-generado anteriormente. Si deseamos ver la información de la clave privada que
+generado anteriormente. Si deseamos ver la información de la clave privada y la pública asociada que
 hemos generado podemos usar 
 
 \begin{lstlisting}[language=bash]
@@ -132,7 +132,7 @@ Si queremos guardar la clave pública en un archivo tenemos que hacer
   openssl ec -in userS-privkey.pem -pubout -out userS-pubkey.pem
 \end{lstlisting}
 
-donde a partir de nuestra clave privada generamos un arvhivo de clave pública
+donde a partir de nuestra clave privada generamos un archivo de clave pública
 con la clave pública generada. Para ver la información almacenada en el nuevo
 archivo 
 
@@ -143,7 +143,7 @@ archivo
 En este paso podemos comprobar  que el contenido coincide con la información que
 obtuvimos al generar la clave privada.
 
-Procedemos a firmar ahora un documento. Creamos un archivo para ello que hemos
+Procedemos a firmar ahora un mensaje. Creamos un archivo para ello que hemos
 llamado \textit{msg.txt} y procedemos a firmarlo utilizando la clave privada que
 hemos generado con anterioridad.
 
@@ -151,19 +151,19 @@ hemos generado con anterioridad.
   openssl dgst -sign userS-privkey.pem -out msg.txt.sign msg.txt
 \end{lstlisting}
 
-Para realizar el cifrado creamos un archivo generado a partir de nuestra clave
-privada. Esto lo hacemos, ya que OpenSSL no nos permite cifrar directamente,
+Para realizar el cifrado creamos un secreto compartido generado a partir de nuestra clave
+privada y la clave pública del receptor (suponiendo las claves generadas e intercambiadas). Esto lo hacemos por que OpenSSL no nos permite cifrar directamente
 usando el archivo de la clave privada generada en los primeros pasos.
 
 \begin{lstlisting}[language=bash]
-  openssl pkeyutl -derive -inkey userS-privkey.pem \\
+  openssl pkeyutl -derive -inkey userS-privkey.pem \
     -peerkey userR-pubkey.pem -out secret.txt
 \end{lstlisting}
 
-y ciframos ahora utilizando el archivo de clave generado como clave
+Ciframos ahora utilizando el archivo de clave generado como clave
 
 \begin{lstlisting}[language=bash]
-  openssl enc -aes-256-cbc -md sha512 -pbkdf2 -iter 100000 -salt \\
+  openssl enc -aes-256-cbc -md sha512 -pbkdf2 -iter 100000 -salt \
    -in msg.txt -out msg.txt.enc -pass file:secret.txt
 \end{lstlisting}
 
@@ -171,23 +171,21 @@ además le hemos indicado que usamos \textit{sha512} como función de resumen y
 \textit{aes-256-cbc} como sistema de cifrado.
 
 Ahora el potencial receptor del mensaje debe seguir los siguientes pasos. En
-primer lugar se crea un secreto 
+primer lugar crea el mismo secreto, pero esta vez usando su clave privada y la clave pública del emisor
 
 \begin{lstlisting}[language=bash]
-  openssl pkeyutl -derive -inkey userR-privkey.pem -peerkey \\
+  openssl pkeyutl -derive -inkey userR-privkey.pem -peerkey \
     userS-pubkey.pem -out secret.txt
 \end{lstlisting}
 
-aquí el receptor usa su clave privada y la clave pública del emisor. Para
-descrifrar se usa
+Para descrifrar se añade la opción \texttt{-d}
 
 \begin{lstlisting}[language=bash]
-  openssl enc -aes-256-cbc -md sha512 -pbkdf2 -iter 100000 -salt -d \\
+  openssl enc -aes-256-cbc -md sha512 -pbkdf2 -iter 100000 -salt -d \
     -in msg.txt.enc -out msg.txt -pass file:secret.txt
 \end{lstlisting}
 
-Y por último para verificar la firma del documento usamos la clave pública de la
-persona que envía y el documento de la firma sobre el documento que hemos
+Y por último para verificar la firma del documento usamos la clave pública del emisor y el documento de la firma sobre el documento que hemos
 obtenido al descifrar.
 
 \begin{lstlisting}[language=bash]
