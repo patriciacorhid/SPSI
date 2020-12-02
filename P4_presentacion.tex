@@ -68,11 +68,11 @@ relaciona dos elementos de la siguiente forma
 (a_0',\dots,a_n')
     \end{align*}
 
-En el caso $K=\mathbb{R}$, $\mathbb{P}_2$ tiene como elementos a las rectas
-vectoriales de $\mathbb{R}^3$. Intuitivamente, este espacio se puede
-interpretar como un plano y una recta ``en el infinito''.
-
-En $\mathbb{P}_n(K)$ dos rectas siempre se cortan, ya que las rectas paralelas se cortan ``en el infinito''.
+    En el caso $K=\mathbb{R}$, $\mathbb{P}_2$ tiene como elementos a
+    las rectas vectoriales de $\mathbb{R}^3$. Intuitivamente, este
+    espacio se puede interpretar como un plano y una recta ``en el
+    infinito''. Como curiosidad, dos rectas en este espacio siempre se
+    cortan, ya que las rectas paralelas se cortan ``en el infinito''.
 \end{frame}
 
 \begin{frame}\frametitle{Definición}
@@ -131,6 +131,7 @@ $\mathbb{R}$ y sobre un grupo finito.
 \section{Operaciones en el grupo de la curva}
 
 \begin{frame}\frametitle{Estructura de grupo de la curva $E$}
+  \[E=\{(x,y)\in K\times K:y^2=x^3+Ax+B\}\cup\{O\}\]
 \begin{figure}[H]
   \centering
   \includegraphics[width=112mm]{imagenes/operaciones}
@@ -246,7 +247,7 @@ La firma es el par $(r,s)$.
 
 \begin{frame}\frametitle{Verificación de la firma}
 
-  Para verificar que el emisor es Alice, Bob seguirÃ¡ los pasos siguentes:
+  Para verificar que el emisor es Alice, Bob seguirá los pasos siguentes:
   \begin{enumerate}
 \item Comprueba que $Q_A \neq O$.
 \item Se debe cumplir que $nQ_A=O$
@@ -271,11 +272,11 @@ Finalmente la firma será válida si $r = x_1 \text{ mod }n$. En caso contrario,
 \begin{frame}\frametitle{Comprobación de los pasos de Bob}
 Veremos por qué con $C=u_1G+u_2Q_A$ obtenemos el resultado que queremos. Para ello notamos en primer lugar que $Q_A=d_AG$ por lo que
 $$C=u_1G+u_2d_AG$$
-Ahora usamos la propiedad asociativa:
+Ahora usamos la propiedad distributiva:
 $$C = (u_1+u_2d_A)G$$
 desarrollamos las expresiones de $u_1$ y $u_2$
 $$C = (zs^{-1}+rd_As^{-1})G$$
-y aplicamos la propiedad asociativa de nuevo con lo que
+y aplicamos la propiedad distributiva de nuevo con lo que
 $$C = (z+rd_A)s^{-1}G$$
 Sustituimos $s$ por su expresión tal y como se calculó en el
 algoritmo:
@@ -284,11 +285,13 @@ con lo que obtenemos $C = kG$
 \end{frame}
 
 \begin{frame}\frametitle{Problema}
-  Bajo ningún concepto debemos elegir el mismo número $k$ para calcular dos firmas $(r, s)$, $(r, s')$ de dos mensajes distintos, $m$ y $m'$, ya que si eso ocurre podría averiguarse el
-valor de $d_A$.
+  Bajo ningún concepto debemos elegir el mismo número $k$ para
+  calcular dos firmas $(r, s)$, $(r, s')$ de dos mensajes distintos,
+  $m$ y $m'$, ya que si eso ocurre podría averiguarse el valor de
+  $d_A$.
 
-Este fallo de implementación fue usado para extraer la clave de usada
-en los sistemas PlayStation 3
+Como curiosidad, esta debilidad fue explotada para extraer la clave
+usada en los sistemas PlayStation 3.
 \end{frame}
 
 \begin{frame}\frametitle{Problema}
