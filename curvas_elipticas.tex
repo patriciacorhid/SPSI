@@ -113,7 +113,7 @@ $\mathbb{R}$ y sobre un grupo finito.
 
 \begin{figure}[H] \centering
   \includegraphics[width=120mm]{imagenes/curvas_Fp}
-  \caption{Curva sobre $\mathbb{R}$ y sobre un cuerpo finito}
+  \caption{Curva sobre $\mathbb{R}$ y sobre un cuerpo finito \cite{silverman}}
 \end{figure}
 
 Cada ecuación $y^2 = x^3 + Ax + B$ tiene asociado un discriminante $
@@ -123,7 +123,7 @@ elíptica.
 
 \begin{figure}[H] \centering
   \includegraphics[width=110mm]{imagenes/curvas}
-  \caption{Ejemplo de curvas elípticas}
+  \caption{Ejemplo de curvas elípticas \cite{silverman}}
 \end{figure}
 
 \section{Operaciones en el grupo de la curva}
@@ -154,7 +154,7 @@ también $O+O=O$.
 \begin{figure}[H]
   \centering
   \includegraphics[width=170mm]{imagenes/operaciones}
-  \caption{Estructura de grupo de curvas elípticas}
+  \caption{Estructura de grupo de curvas elípticas \cite{silverman}}
 \end{figure}
 
 Contanto las multiplicidades, la recta siempre toca a la curva en tres
@@ -164,7 +164,7 @@ $P+Q+R=O$. Examinemos los siguientes casos:
 \begin{figure}[H]
   \centering
   \includegraphics[width=170mm]{imagenes/suma}
-  \caption{Casos de la suma en curvas elípticas}
+  \caption{Casos de la suma en curvas elípticas. \cite{wiki:elliptic}}
 \end{figure}
 
 \begin{enumerate}
@@ -593,5 +593,10 @@ obtenido al descifrar.
 \begin{lstlisting}[language=bash]
   openssl dgst -verify userS-pubkey.pem -signature msg.txt.sign msg.txt
 \end{lstlisting}
+
+\nocite{*}
+
+\bibliographystyle{unsrt}
+\bibliography{example}
 
 \end{document}
